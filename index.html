@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureMail - Inbox</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">S</div>
+            <span>SecureMail</span>
+        </div>
+        <div class="user-info">
+            <span>j.smith@company.com</span>
+            <div class="user-avatar">JS</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <button class="compose-btn">✉ Compose</button>
+            <div class="nav-item active">📥 Inbox (12)</div>
+            <div class="nav-item">⭐ Starred</div>
+            <div class="nav-item">📤 Sent</div>
+            <div class="nav-item">📝 Drafts</div>
+            <div class="nav-item">🗑 Trash</div>
+            <div class="nav-item">⚠️ Spam</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="toolbar">
+                <div class="email-checkbox"></div>
+                <button class="toolbar-btn">Delete</button>
+                <button class="toolbar-btn">Archive</button>
+                <button class="toolbar-btn">Mark as Read</button>
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Search mail..." disabled>
+                </div>
+            </div>
+
+            <div class="email-list" id="emailList">
+                <!-- Emails will be inserted by JavaScript -->
+            </div>
+
+            <div class="pagination">
+                <div class="page-info">1-12 of 12</div>
+                <div class="page-controls">
+                    <button>← Newer</button>
+                    <button>Older →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clue Modal -->
+    <div class="modal-overlay" id="clueModal">
+        <div class="clue-modal">
+            <div class="clue-letter" id="clueLetter">A</div>
+            <div class="clue-message" id="clueMessage">Letter recorded</div>
+            <button class="close-modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+   <script type="module">
+    import { emails } from './data/emails.js';
+
+    const openedEmails = new Set();
+
+    function renderEmails() {
+        const emailList = document.getElementById('emailList');
+        emailList.innerHTML = '';
+
+        emails.forEach(email => {
+            const isUnread = !openedEmails.has(email.id);
+            const emailDiv = document.createElement('div');
+            emailDiv.className = `email-item ${isUnread ? 'unread' : ''}`;
+            emailDiv.onclick = () => openEmail(email.id);
+            
+            emailDiv.innerHTML = `
+                <div class="email-checkbox"></div>
+                <div class="email-content">
+                    <div class="email-header">
+                        <span class="email-sender">${email.sender}</span>
+                    </div>
+                    <div class="email-subject">${email.subject}</div>
+                    <div class="email-preview">${email.preview}</div>
+                </div>
+                <div class="email-time">${email.time}</div>
+            `;
+            
+            emailList.appendChild(emailDiv);
+        });
+    }
+
+    function openEmail(emailId) {
+        openedEmails.add(emailId);
+        sessionStorage.setItem('currentEmailId', emailId);
+        window.location.href = 'email.html';
+    }
+
+    function closeModal() {
+        document.getElementById('clueModal').classList.remove('active');
+    }
+
+    renderEmails();
+</script>
+</body>
+</html>
