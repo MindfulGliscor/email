@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureMail - Inbox</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <!-- Boo Consulting Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Shared Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -49,7 +49,7 @@
             </div>
 
             <div class="email-list" id="emailList">
-                <!-- Emails will be inserted by JavaScript -->
+                <!-- Emails will be rendered here -->
             </div>
 
             <div class="pagination">
@@ -71,48 +71,49 @@
         </div>
     </div>
 
-   <script type="module">
-    import { emails } from './data/emails.js';
+    <!-- Emails JS -->
+    <script type="module">
+        import { emails } from './data/emails.js';
 
-    const openedEmails = new Set();
+        const openedEmails = new Set();
 
-    function renderEmails() {
-        const emailList = document.getElementById('emailList');
-        emailList.innerHTML = '';
+        function renderEmails() {
+            const emailList = document.getElementById('emailList');
+            emailList.innerHTML = '';
 
-        emails.forEach(email => {
-            const isUnread = !openedEmails.has(email.id);
-            const emailDiv = document.createElement('div');
-            emailDiv.className = `email-item ${isUnread ? 'unread' : ''}`;
-            emailDiv.onclick = () => openEmail(email.id);
-            
-            emailDiv.innerHTML = `
-                <div class="email-checkbox"></div>
-                <div class="email-content">
-                    <div class="email-header">
-                        <span class="email-sender">${email.sender}</span>
+            emails.forEach(email => {
+                const isUnread = !openedEmails.has(email.id);
+                const emailDiv = document.createElement('div');
+                emailDiv.className = `email-item ${isUnread ? 'unread' : ''}`;
+                emailDiv.onclick = () => openEmail(email.id);
+                
+                emailDiv.innerHTML = `
+                    <div class="email-checkbox"></div>
+                    <div class="email-content">
+                        <div class="email-header">
+                            <span class="email-sender">${email.sender}</span>
+                        </div>
+                        <div class="email-subject">${email.subject}</div>
+                        <div class="email-preview">${email.preview}</div>
                     </div>
-                    <div class="email-subject">${email.subject}</div>
-                    <div class="email-preview">${email.preview}</div>
-                </div>
-                <div class="email-time">${email.time}</div>
-            `;
-            
-            emailList.appendChild(emailDiv);
-        });
-    }
+                    <div class="email-time">${email.time}</div>
+                `;
+                
+                emailList.appendChild(emailDiv);
+            });
+        }
 
-    function openEmail(emailId) {
-        openedEmails.add(emailId);
-        sessionStorage.setItem('currentEmailId', emailId);
-        window.location.href = 'email.html';
-    }
+        function openEmail(emailId) {
+            openedEmails.add(emailId);
+            sessionStorage.setItem('currentEmailId', emailId);
+            window.location.href = 'email.html';
+        }
 
-    function closeModal() {
-        document.getElementById('clueModal').classList.remove('active');
-    }
+        function closeModal() {
+            document.getElementById('clueModal').classList.remove('active');
+        }
 
-    renderEmails();
-</script>
+        renderEmails();
+    </script>
 </body>
 </html>
