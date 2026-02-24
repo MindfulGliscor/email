@@ -12,18 +12,22 @@
 ========================= */
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: #F4F7F9; /* Soft Gray */
-    color: #4A4A4A; /* Text Charcoal */
+    background-color: #F4F7F9;
+    /* Soft Gray */
+    color: #4A4A4A;
+    /* Text Charcoal */
 }
 
 /* =========================
    Header
 ========================= */
 .header {
-    background-color: #1B2E3C; /* Deep Navy */
-    color: #FFFFFF; /* Bright White */
+    background-color: #1B2E3C;
+    /* Deep Navy */
+    color: #FFFFFF;
+    /* Bright White */
     padding: 16px 32px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -92,7 +96,8 @@ body {
 .nav-item {
     padding: 10px 24px;
     cursor: not-allowed;
-    color: #6B7280; /* Neutral Gray */
+    color: #6B7280;
+    /* Neutral Gray */
     display: flex;
     align-items: center;
     gap: 12px;
@@ -294,7 +299,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     align-items: center;
     justify-content: center;
@@ -310,7 +315,7 @@ body {
     padding: 32px;
     max-width: 400px;
     width: 90%;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
