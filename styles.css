@@ -1,19 +1,27 @@
+/* =========================
+   Reset
+========================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* =========================
+   Fonts & Colors
+========================= */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f3f4f6;
-    color: #1f2937;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #F4F7F9; /* Soft Gray */
+    color: #4A4A4A; /* Text Charcoal */
 }
 
-/* Header */
+/* =========================
+   Header
+========================= */
 .header {
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-    color: white;
+    background-color: #1B2E3C; /* Deep Navy */
+    color: #FFFFFF; /* Bright White */
     padding: 16px 32px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     display: flex;
@@ -25,6 +33,7 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     font-weight: 700;
 }
@@ -32,12 +41,12 @@ body {
 .logo-icon {
     width: 36px;
     height: 36px;
-    background: white;
+    background: #FFFFFF;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1e40af;
+    color: #1B2E3C;
     font-weight: 900;
     font-size: 20px;
 }
@@ -51,37 +60,33 @@ body {
 .user-avatar {
     width: 36px;
     height: 36px;
-    background: #60a5fa;
+    background: #00A8B5; /* Vibrant Teal */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* Main Container */
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    height: calc(100vh - 68px);
-}
-
-/* Sidebar */
+/* =========================
+   Sidebar
+========================= */
 .sidebar {
     width: 240px;
-    background: white;
-    border-right: 1px solid #e5e7eb;
+    background: #FFFFFF;
+    border-right: 1px solid #F4F7F9;
     padding: 20px 0;
 }
 
 .compose-btn {
-    background: #1e40af;
-    color: white;
+    background: #00A8B5; /* Vibrant Teal */
+    color: #FFFFFF;
     border: none;
     padding: 12px 24px;
     margin: 0 16px 24px;
     border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
     font-size: 15px;
     font-weight: 600;
     cursor: not-allowed;
@@ -92,45 +97,59 @@ body {
 .nav-item {
     padding: 10px 24px;
     cursor: not-allowed;
-    color: #6b7280;
+    color: #6B7280; /* Neutral Gray */
     display: flex;
     align-items: center;
     gap: 12px;
     font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .nav-item.active {
-    background: #eff6ff;
-    color: #1e40af;
-    border-right: 3px solid #1e40af;
+    background: #EFF6FF;
+    color: #1B2E3C;
+    border-right: 3px solid #1B2E3C;
     font-weight: 600;
 }
 
-/* Main Content */
+/* =========================
+   Main Container
+========================= */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    height: calc(100vh - 68px);
+}
+
+/* =========================
+   Main Content
+========================= */
 .main-content {
     flex: 1;
-    background: white;
+    background: #FFFFFF;
     display: flex;
     flex-direction: column;
 }
 
 .toolbar {
     padding: 16px 24px;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid #F4F7F9;
     display: flex;
     align-items: center;
     gap: 12px;
-    background: #f9fafb;
+    background: #FFFFFF;
 }
 
 .toolbar-btn {
-    background: white;
-    border: 1px solid #d1d5db;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
     padding: 8px 16px;
     border-radius: 6px;
     font-size: 13px;
     cursor: not-allowed;
-    color: #9ca3af;
+    color: #9CA3AF;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .search-box {
@@ -142,9 +161,10 @@ body {
 .search-box input {
     width: 100%;
     padding: 8px 16px 8px 36px;
-    border: 1px solid #d1d5db;
+    border: 1px solid #D1D5DB;
     border-radius: 6px;
     font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .search-icon {
@@ -152,10 +172,12 @@ body {
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #9ca3af;
+    color: #9CA3AF;
 }
 
-/* Email List */
+/* =========================
+   Email List
+========================= */
 .email-list {
     flex: 1;
     overflow-y: auto;
@@ -163,7 +185,7 @@ body {
 
 .email-item {
     padding: 16px 24px;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid #F4F7F9;
     cursor: pointer;
     transition: background 0.2s;
     display: grid;
@@ -173,17 +195,17 @@ body {
 }
 
 .email-item:hover {
-    background: #f9fafb;
+    background: #F9FAFB;
 }
 
 .email-item.unread {
-    background: #eff6ff;
+    background: #EFF6FF;
 }
 
 .email-checkbox {
     width: 18px;
     height: 18px;
-    border: 2px solid #d1d5db;
+    border: 2px solid #D1D5DB;
     border-radius: 3px;
     cursor: not-allowed;
 }
@@ -203,7 +225,8 @@ body {
 
 .email-sender {
     font-size: 14px;
-    color: #1f2937;
+    color: #1B2E3C;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .email-item.unread .email-sender {
@@ -212,7 +235,7 @@ body {
 
 .email-subject {
     font-size: 13px;
-    color: #1f2937;
+    color: #1B2E3C;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -224,7 +247,7 @@ body {
 
 .email-preview {
     font-size: 13px;
-    color: #6b7280;
+    color: #6B7280;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -232,37 +255,43 @@ body {
 
 .email-time {
     font-size: 12px;
-    color: #9ca3af;
+    color: #9CA3AF;
     white-space: nowrap;
 }
 
-/* Pagination */
+/* =========================
+   Pagination
+========================= */
 .pagination {
     padding: 16px 24px;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid #F4F7F9;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #f9fafb;
+    background: #FFFFFF;
 }
 
 .page-info {
     font-size: 13px;
-    color: #6b7280;
+    color: #6B7280;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .page-controls button {
-    background: white;
-    border: 1px solid #d1d5db;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
     padding: 6px 12px;
     margin-left: 8px;
     border-radius: 4px;
     font-size: 13px;
     cursor: not-allowed;
-    color: #9ca3af;
+    color: #9CA3AF;
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* Modal Styles */
+/* =========================
+   Modal
+========================= */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -270,7 +299,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0,0,0,0.5);
     z-index: 1000;
     align-items: center;
     justify-content: center;
@@ -281,33 +310,34 @@ body {
 }
 
 .clue-modal {
-    background: white;
+    background-color: #FFFFFF;
     border-radius: 12px;
     padding: 32px;
     max-width: 400px;
     width: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     text-align: center;
 }
 
 .clue-letter {
-    font-size: 72px;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    color: #1e40af;
+    font-size: 72px;
+    color: #1B2E3C;
     margin: 20px 0;
-    font-family: 'Courier New', monospace;
     letter-spacing: 4px;
 }
 
 .clue-message {
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    color: #6b7280;
+    color: #6B7280;
     margin-bottom: 24px;
 }
 
 .close-modal-btn {
-    background: #1e40af;
-    color: white;
+    background: #00A8B5;
+    color: #FFFFFF;
     border: none;
     padding: 12px 32px;
     border-radius: 8px;
@@ -315,8 +345,9 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .close-modal-btn:hover {
-    background: #1e3a8a;
+    background: #008C99;
 }
