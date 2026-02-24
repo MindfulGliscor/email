@@ -32,23 +32,18 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
+    white-space: nowrap;
+    margin-left: 8px;
 }
 
 .logo-icon {
-    width: 36px;
-    height: 36px;
-    background: #FFFFFF;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1B2E3C;
-    font-weight: 900;
-    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
 }
 
 .user-info {
@@ -60,7 +55,7 @@ body {
 .user-avatar {
     width: 36px;
     height: 36px;
-    background: #00A8B5; /* Vibrant Teal */
+    background: #DA6B00;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -80,7 +75,7 @@ body {
 }
 
 .compose-btn {
-    background: #00A8B5; /* Vibrant Teal */
+    background: #DA6B00;
     color: #FFFFFF;
     border: none;
     padding: 12px 24px;
@@ -106,9 +101,9 @@ body {
 }
 
 .nav-item.active {
-    background: #EFF6FF;
+    background: #FFF0E0;
     color: #1B2E3C;
-    border-right: 3px solid #1B2E3C;
+    border-right: 3px solid #DA6B00;
     font-weight: 600;
 }
 
@@ -336,7 +331,7 @@ body {
 }
 
 .close-modal-btn {
-    background: #00A8B5;
+    background: #DA6B00;
     color: #FFFFFF;
     border: none;
     padding: 12px 32px;
@@ -349,5 +344,5 @@ body {
 }
 
 .close-modal-btn:hover {
-    background: #008C99;
+    background: #B35F00;
 }
