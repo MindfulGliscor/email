@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureMail - Email</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 16px 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e40af;
+            font-weight: 900;
+            font-size: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: #60a5fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 24px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Action Bar */
+        .action-bar {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f9fafb;
+        }
+
+        .back-btn {
+            background: white;
+            border: 1px solid #d1d5db;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .report-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .report-btn:hover {
+            background: #b91c1c;
+        }
+
+        .action-spacer {
+            flex: 1;
+        }
+
+        .action-btn {
+            background: white;
+            border: 1px solid #d1d5db;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: not-allowed;
+            color: #9ca3af;
+        }
+
+        /* Email Header */
+        .email-header {
+            padding: 32px 32px 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .email-subject {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        .sender-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .sender-avatar {
+            width: 48px;
+            height: 48px;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .sender-details {
+            flex: 1;
+        }
+
+        .sender-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .sender-email {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .email-meta {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        /* Email Body */
+        .email-body {
+            padding: 32px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #374151;
+        }
+
+        .email-body p {
+            margin-bottom: 16px;
+        }
+
+        .email-body a {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        .attachment-section {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .attachment-label {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .attachment-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: not-allowed;
+        }
+
+        .attachment-icon {
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .attachment-info {
+            flex: 1;
+        }
+
+        .attachment-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .attachment-size {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .clue-modal {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .clue-letter {
+            font-size: 96px;
+            font-weight: 700;
+            color: #1e40af;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 8px;
+        }
+
+        .clue-message {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .close-modal-btn {
+            background: #1e40af;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .close-modal-btn:hover {
+            background: #1e3a8a;
+        }
+
+        .warning-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">S</div>
+            <span>SecureMail</span>
+        </div>
+        <div class="user-info">
+            <span>j.smith@company.com</span>
+            <div class="user-avatar">JS</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Action Bar -->
+        <div class="action-bar">
+            <button class="back-btn" onclick="goBack()">
+                ← Back to Inbox
+            </button>
+            <button class="report-btn" onclick="reportEmail()">
+                ⚠ Report as Suspicious
+            </button>
+            <div class="action-spacer"></div>
+            <button class="action-btn">Reply</button>
+            <button class="action-btn">Forward</button>
+            <button class="action-btn">Delete</button>
+        </div>
+
+        <!-- Email Content -->
+        <div id="emailContent">
+            <!-- Content will be inserted by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Clue Modal -->
+    <div class="modal-overlay" id="clueModal">
+        <div class="clue-modal">
+            <div class="warning-icon">⚠️</div>
+            <div class="clue-letter" id="clueLetter">A</div>
+            <div class="clue-message" id="clueMessage">Letter recorded</div>
+            <button class="close-modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Email data (same as index.html)
+        const emails = [
+            {
+                id: 1,
+                sender: "IT-Support@company-secure.net",
+                senderName: "IT Support",
+                subject: "URGENT: Password Verification Required",
+                time: "Today at 9:45 AM",
+                body: `Dear User,
+
+We have detected unusual activity on your company email account. For security purposes, you must verify your password within the next 24 hours to prevent your account from being locked.
+
+Click here to verify your credentials: http://company-secure.net/verify-account
+
+If you do not complete this verification, your email access will be suspended and all emails will be permanently deleted.
+
+This is an automated security measure. Please do not reply to this email.
+
+Thank you,
+IT Security Team`,
+                suspicious: true,
+                letter: "C",
+                hasAttachment: false
+            },
+            {
+                id: 2,
+                sender: "s.johnson@company.com",
+                senderName: "Sarah Johnson",
+                subject: "Q4 Budget Meeting - Thursday 2PM",
+                time: "Today at 9:12 AM",
+                body: `Hi team,
+
+Just confirming our quarterly budget review meeting scheduled for this Thursday at 2PM in Conference Room B.
+
+Please bring your departmental reports and any budget proposals for Q1 2025. We'll be reviewing current spending and planning for next quarter's allocations.
+
+Looking forward to seeing everyone there!
+
+Best regards,
+Sarah Johnson
+Finance Manager`,
+                suspicious: false,
+                letter: "X",
+                hasAttachment: false
+            },
+            {
+                id: 3,
+                sender: "r.chen@company-mail.com",
+                senderName: "Robert Chen CEO",
+                subject: "Re: Urgent Wire Transfer Needed",
+                time: "Today at 8:54 AM",
+                body: `Hi,
+
+I'm currently in an important board meeting and cannot make calls right now. I need you to process an urgent wire transfer for a confidential acquisition we're finalizing.
+
+The amount is $47,500 and needs to be sent today before market close. I'll send you the wire instructions in a separate email shortly.
+
+Please keep this completely confidential - only senior management is aware of this deal at this stage.
+
+I'll call you when I'm out of the meeting to confirm.
+
+Thanks,
+Robert Chen
+CEO`,
+                suspicious: true,
+                letter: "Y",
+                hasAttachment: false
+            },
+            {
+                id: 4,
+                sender: "hr-notifications@companyhr.net",
+                senderName: "HR Department",
+                subject: "Updated Employee Handbook 2024.pdf",
+                time: "Today at 8:33 AM",
+                body: `Dear Employees,
+
+The updated 2024 Employee Handbook is now available. Please review the attached document as it contains important policy changes that take effect immediately.
+
+All employees must acknowledge receipt of this handbook by end of week. Failure to do so may result in compliance violations.
+
+Key updates include:
+- Remote work policies
+- Updated vacation accrual rates
+- New cybersecurity requirements
+- Benefits enrollment procedures
+
+Please download and review the attached PDF.
+
+Human Resources Department`,
+                suspicious: true,
+                letter: "B",
+                hasAttachment: true,
+                attachmentName: "Employee_Handbook_2024.pdf",
+                attachmentSize: "2.4 MB"
+            },
+            {
+                id: 5,
+                sender: "marketing@company.com",
+                senderName: "Marketing Team",
+                subject: "New Product Launch Materials Ready",
+                time: "Yesterday at 4:22 PM",
+                body: `Hi everyone,
+
+Great news! The marketing materials for next month's product launch are now ready for your review.
+
+Everything has been uploaded to the shared drive in the "Q4 Product Launch" folder:
+- Product brochures
+- Social media assets
+- Press release draft
+- Presentation deck
+
+Please review by Friday and share any feedback in the team channel. We're on track for the November 20th launch date!
+
+Thanks,
+Marketing Team`,
+                suspicious: false,
+                letter: "Q",
+                hasAttachment: false
+            },
+            {
+                id: 6,
+                sender: "security@linkedin-verify.com",
+                senderName: "LinkedIn Security",
+                subject: "Unusual sign-in activity detected",
+                time: "Yesterday at 2:18 PM",
+                body: `Hello,
+
+We detected a sign-in to your LinkedIn account from an unrecognized device:
+
+Device: Windows PC
+Location: Moscow, Russia
+Time: November 3, 2024 - 14:07 GMT
+
+If this wasn't you, your account may be compromised. Secure your account immediately by clicking below:
+
+Secure My Account Now: http://linkedin-verify.com/secure
+
+If you don't take action within 24 hours, your account may be permanently suspended for security reasons.
+
+LinkedIn Security Team`,
+                suspicious: true,
+                letter: "E",
+                hasAttachment: false
+            },
+            {
+                id: 7,
+                sender: "noreply@microsofft-support.com",
+                senderName: "Microsoft365 Team",
+                subject: "Your subscription expires today",
+                time: "Yesterday at 11:44 AM",
+                body: `Important Notice
+
+Your Microsoft 365 Business subscription will expire in 6 hours.
+
+Subscription Details:
+- Account: j.smith@company.com
+- Expires: November 3, 2024 at 11:59 PM
+- Current Plan: Business Premium
+
+After expiration:
+✗ Access to all Office applications will be disabled
+✗ All OneDrive files will be deleted permanently
+✗ Email service will be terminated
+
+RENEW NOW to avoid service interruption and data loss.
+
+Click here to renew: http://microsofft-support.com/renew
+
+Microsoft Corporation`,
+                suspicious: true,
+                letter: "R",
+                hasAttachment: false
+            },
+            {
+                id: 8,
+                sender: "d.martinez@company.com",
+                senderName: "David Martinez",
+                subject: "Great job on the presentation!",
+                time: "2 days ago",
+                body: `Hey,
+
+Just wanted to say really impressive work on yesterday's client presentation. The way you handled their technical questions was excellent, and they were clearly impressed with our proposed solution.
+
+The team feedback has been very positive as well. Looking forward to working with you on the implementation phase!
+
+Keep up the great work!
+
+Best,
+David Martinez
+Senior Project Manager`,
+                suspicious: false,
+                letter: "M",
+                hasAttachment: false
+            },
+            {
+                id: 9,
+                sender: "ap@vendor-solutions.org",
+                senderName: "Accounts Payable",
+                subject: "Invoice #8847 - Payment Details Updated",
+                time: "2 days ago",
+                body: `Dear Valued Customer,
+
+This is to inform you that our banking information has recently been updated. Please update your payment records immediately to avoid any delays in processing.
+
+Invoice #8847 for services rendered is now due. 
+
+NEW PAYMENT DETAILS:
+Bank: International Commerce Bank
+Account Name: Vendor Solutions LLC
+Account Number: 847392847
+Routing Number: 021000021
+SWIFT: ICBKUS33
+
+Please remit payment of $12,450.00 using the updated banking information above. Previous banking details are no longer valid.
+
+For questions, contact our AP department.
+
+Vendor Solutions
+Accounts Payable Department`,
+                suspicious: true,
+                letter: "S",
+                hasAttachment: false
+            },
+            {
+                id: 10,
+                sender: "tracking@fedex-delivery.net",
+                senderName: "FedEx Delivery",
+                subject: "Package delivery failed - Action required",
+                time: "3 days ago",
+                body: `Delivery Notification
+
+We attempted to deliver your package but no one was available to receive it.
+
+Tracking Number: FX847392847
+Delivery Address: 425 Market St, San Francisco, CA
+Attempted: November 1, 2024 at 2:35 PM
+
+Your package contains important documents and requires signature confirmation. 
+
+IMPORTANT: You must reschedule delivery within 48 hours or your package will be returned to sender and additional storage fees will apply.
+
+Reschedule Delivery: http://fedex-delivery.net/reschedule?id=FX847392847
+
+Package Details:
+- Sender: Legal Department
+- Weight: 2.5 lbs
+- Service: Overnight Priority
+
+FedEx Customer Service`,
+                suspicious: true,
+                letter: "E",
+                hasAttachment: false
+            },
+            {
+                id: 11,
+                sender: "training@company.com",
+                senderName: "Training Coordinator",
+                subject: "Reminder: Compliance Training Due Friday",
+                time: "3 days ago",
+                body: `Hello Team,
+
+This is a friendly reminder that annual compliance training must be completed by Friday, November 15th.
+
+The training covers:
+- Data privacy and GDPR compliance
+- Workplace safety procedures
+- Anti-harassment policies
+- Information security best practices
+
+To complete your training:
+1. Log into the company learning portal
+2. Navigate to "Required Training"
+3. Complete all modules
+4. Acknowledge completion
+
+The training takes approximately 2 hours. You may complete it in multiple sessions.
+
+Thank you for your cooperation!
+
+Training & Development Team`,
+                suspicious: false,
+                letter: "Z",
+                hasAttachment: false
+            },
+            {
+                id: 12,
+                sender: "no-reply@dropbox-share.com",
+                senderName: "Dropbox Team",
+                subject: "Shared file: Q4_Financial_Report.xlsx",
+                time: "4 days ago",
+                body: `You have a new shared file
+
+John Anderson (j.anderson@company.com) has shared a file with you on Dropbox.
+
+File Name: Q4_Financial_Report.xlsx
+Shared: October 30, 2024
+Expires: November 2, 2024 (24 hours remaining)
+
+This file contains sensitive financial data and will expire soon for security purposes.
+
+View File Now: http://dropbox-share.com/file/q4-financial-847392
+
+Important: This is a time-sensitive share. After expiration, you will need to request access again from the sender.
+
+The Dropbox Team`,
+                suspicious: true,
+                letter: "C",
+                hasAttachment: false
+            }
+        ];
+
+        let currentEmail = null;
+
+        // Load email content
+        function loadEmail() {
+            const emailId = parseInt(sessionStorage.getItem('currentEmailId'));
+            currentEmail = emails.find(e => e.id === emailId);
+
+            if (!currentEmail) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const contentDiv = document.getElementById('emailContent');
+            
+            // Get initials from sender name
+            const initials = currentEmail.senderName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+
+            let attachmentHTML = '';
+            if (currentEmail.hasAttachment) {
+                attachmentHTML = `
+                    <div class="attachment-section">
+                        <div class="attachment-label">1 Attachment</div>
+                        <div class="attachment-item">
+                            <div class="attachment-icon">📎</div>
+                            <div class="attachment-info">
+                                <div class="attachment-name">${currentEmail.attachmentName}</div>
+                                <div class="attachment-size">${currentEmail.attachmentSize}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            contentDiv.innerHTML = `
+                <div class="email-header">
+                    <h1 class="email-subject">${currentEmail.subject}</h1>
+                    <div class="sender-info">
+                        <div class="sender-avatar">${initials}</div>
+                        <div class="sender-details">
+                            <div class="sender-name">${currentEmail.senderName}</div>
+                            <div class="sender-email">&lt;${currentEmail.sender}&gt;</div>
+                            <div class="email-meta">to: me • ${currentEmail.time}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="email-body">
+                    ${currentEmail.body.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '<p>&nbsp;</p>').join('')}
+                    ${attachmentHTML}
+                </div>
+            `;
+        }
+
+        // Go back to inbox
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // Report email
+        function reportEmail() {
+            if (!currentEmail) return;
+
+            const modal = document.getElementById('clueModal');
+            const letterDiv = document.getElementById('clueLetter');
+            const messageDiv = document.getElementById('clueMessage');
+
+            letterDiv.textContent = currentEmail.letter;
+            
+            if (currentEmail.suspicious) {
+                messageDiv.textContent = 'Clue recorded successfully';
+            } else {
+                messageDiv.textContent = 'This email appears to be legitimate';
+            }
+
+            modal.classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('clueModal').classList.remove('active');
+        }
+
+        // Initialize
+        loadEmail();
+
+        // Handle browser back button
+        window.addEventListener('popstate', function(event) {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
