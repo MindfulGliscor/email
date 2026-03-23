@@ -15,10 +15,15 @@ We used Git Bash to commit and push our work to GitHub. The project includes mul
 ## How to Run
 
 1. Clone the repository
-2. Open the folder
-3. Open `index.html` in a browser
+2. Run the project through a tiny local server.
+Examples:
 
----
+python -m http.server 8000
+
+Then open:
+
+http://localhost:8000/index.html
+
 
 ## Files
 
