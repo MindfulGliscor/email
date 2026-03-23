@@ -26,7 +26,7 @@
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Action Bar -->
+        <!-- Action Bar --> 
         <div class="action-bar">
             <button class="back-btn" onclick="goBack()">
                 ← Back to Inbox
@@ -124,7 +124,7 @@
             const letterDiv = document.getElementById('clueLetter');
             const messageDiv = document.getElementById('clueMessage');
 
-            letterDiv.textContent = currentEmail.digit;
+            letterDiv.textContent = currentEmail.letter;
 
             if (currentEmail.suspicious) {
                 messageDiv.textContent = 'Digit recorded successfully';

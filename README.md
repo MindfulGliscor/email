@@ -26,6 +26,11 @@ We used Git Bash to commit and push our work to GitHub. The project includes mul
 * other `.html` files – emails
 * `.css` – styling
 * `.js` – functionality
-* images/logo files
+* 'assets' - logo 
+
+## Overview
+
+in the browser, use local host to run the index.html file. all the emails and assigned letters in email.js can be changed.
+
 
 
